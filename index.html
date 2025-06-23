@@ -42,7 +42,6 @@
     main h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
-      backdrop-filter: blur(6px);
     }
 
     main h2 {
@@ -96,6 +95,44 @@
       background: rgba(255,255,255,0.3);
     }
 
+    .members {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .member {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .member:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .member img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      object-fit: cover;
+    }
+
+    .member h3 {
+      margin: 0.5rem 0 0;
+      font-size: 1.2rem;
+      color: #111;
+    }
+
     footer {
       background: rgba(228, 239, 201, 0.8);
       backdrop-filter: blur(6px);
@@ -126,6 +163,22 @@
       <li>Nerf</li>
       <li>Secret Project</li>
     </ul>
+
+    <h2>Members:</h2>
+    <div class="members">
+      <div class="member">
+        <img src="images/gabor.jpg" alt="Gábor">
+        <h3>Gábor</h3>
+      </div>
+      <div class="member">
+        <img src="images/tomi.jpg" alt="Tomi">
+        <h3>Tomi</h3>
+      </div>
+      <div class="member">
+        <img src="images/keve.jpg" alt="Keve">
+        <h3>Keve</h3>
+      </div>
+    </div>
   </main>
 
   <footer>
