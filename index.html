@@ -9,28 +9,30 @@
       --primary-color: #C0DE63;
       --accent-color: #a5c84f;
       --text-color: #222;
-      --background-color: #f4f6f8;
-      --card-bg: #fff;
-      --card-shadow: rgba(0, 0, 0, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --background-gradient: linear-gradient(135deg, #e8f0d9, #f6f8f9);
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--background-color);
+      background: var(--background-gradient);
       color: var(--text-color);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      backdrop-filter: blur(2px);
     }
 
     header {
-      background-color: var(--primary-color);
+      background-color: rgba(192, 222, 99, 0.9);
       color: #fff;
       padding: 2rem;
       font-size: 2rem;
       font-weight: bold;
       text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     main {
@@ -55,20 +57,23 @@
 
     a.button {
       display: inline-block;
-      background-color: var(--primary-color);
+      background: var(--glass-bg);
       color: #fff;
       text-decoration: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-      box-shadow: 0 4px 12px var(--card-shadow);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
     }
 
     a.button:hover {
-      background-color: var(--accent-color);
+      background: rgba(255, 255, 255, 0.25);
       transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .projects {
@@ -81,20 +86,30 @@
     }
 
     .projects li {
-      background-color: var(--card-bg);
-      padding: 1rem 1.25rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px var(--card-shadow);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       font-weight: 500;
+      color: #222;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .projects li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
     }
 
     footer {
-      background-color: #e4efc9;
+      background-color: rgba(255,255,255,0.5);
       color: #333;
       padding: 1rem;
       text-align: center;
       font-size: 0.9rem;
-      margin-top: auto;
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--glass-border);
     }
   </style>
 </head>
