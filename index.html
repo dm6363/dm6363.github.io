@@ -36,9 +36,11 @@
       text-align: center;
     }
 
-    button {
+    button, a.button {
+      display: inline-block;
       background-color: var(--primary-color);
       color: #fff;
+      text-decoration: none;
       border: none;
       padding: 0.75rem 1.5rem;
       border-radius: 8px;
@@ -47,7 +49,7 @@
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    button:hover, a.button:hover {
       background-color: #a5c84f;
     }
 
