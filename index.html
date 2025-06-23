@@ -7,8 +7,11 @@
   <style>
     :root {
       --primary-color: #C0DE63;
+      --accent-color: #a5c84f;
       --text-color: #222;
-      --background-color: #f9f9f9;
+      --background-color: #f4f6f8;
+      --card-bg: #fff;
+      --card-shadow: rgba(0, 0, 0, 0.05);
     }
 
     body {
@@ -24,49 +27,65 @@
     header {
       background-color: var(--primary-color);
       color: #fff;
-      padding: 1.5rem;
-      text-align: center;
+      padding: 2rem;
       font-size: 2rem;
       font-weight: bold;
+      text-align: left;
     }
 
     main {
       flex: 1;
       padding: 2rem;
-      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    main h2 {
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
     }
 
-    button, a.button {
+    h2 {
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      text-align: left;
+    }
+
+    a.button {
       display: inline-block;
       background-color: var(--primary-color);
       color: #fff;
       text-decoration: none;
-      border: none;
       padding: 0.75rem 1.5rem;
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s, transform 0.2s;
+      box-shadow: 0 4px 12px var(--card-shadow);
     }
 
-    button:hover, a.button:hover {
-      background-color: #a5c84f;
+    a.button:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
     }
 
     .projects {
-      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
       list-style: none;
       padding: 0;
+      margin: 0;
     }
 
     .projects li {
-      margin: 0.5rem 0;
-      font-weight: bold;
+      background-color: var(--card-bg);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px var(--card-shadow);
+      font-weight: 500;
     }
 
     footer {
@@ -75,6 +94,7 @@
       padding: 1rem;
       text-align: center;
       font-size: 0.9rem;
+      margin-top: auto;
     }
   </style>
 </head>
@@ -86,10 +106,10 @@
   <main>
     <h1>This is the official website of the advanced DM group!</h1>
 
-    <h2>If you want to go to the og DM site:</h2>
-    <a href="website.html" class="button">Click me</a>      
+    <h2>If you want to go to the OG DM site:</h2>
+    <a href="website.html" class="button">Go to OG Site</a>      
 
-    <h2>Current projects:</h2>
+    <h2>Current Projects:</h2>
     <ul class="projects">
       <li>Amplifier</li>
       <li>DM: The Movie</li>
@@ -97,7 +117,7 @@
       <li>Secret Project</li>
     </ul>
 
-    <h2>Expected DM: The Movie relase date:</h2>
+    <h2>Expected DM: The Movie Release Date:</h2>
     <ul class="projects">
       <li>2025. August</li>
     </ul>
