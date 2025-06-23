@@ -36,6 +36,11 @@
       text-align: center;
     }
 
+    main h2 {
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
     button, a.button {
       display: inline-block;
       background-color: var(--primary-color);
@@ -51,6 +56,17 @@
 
     button:hover, a.button:hover {
       background-color: #a5c84f;
+    }
+
+    .projects {
+      margin-top: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .projects li {
+      margin: 0.5rem 0;
+      font-weight: bold;
     }
 
     footer {
@@ -69,10 +85,17 @@
 
   <main>
     <h1>This is the official website of the advanced DM group!</h1>
+
     <h2>If you want to go to the og DM site:</h2>
     <a href="website.html" class="button">Click me</a>
+
     <h2>Current projects:</h2>
-    <p>Amplifier, DM: The Movie, Nerf, Secret Project</p>
+    <ul class="projects">
+      <li>Amplifier</li>
+      <li>DM: The Movie</li>
+      <li>Nerf</li>
+      <li>Secret Project</li>
+    </ul>
   </main>
 
   <footer>
