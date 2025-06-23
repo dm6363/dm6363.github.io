@@ -7,109 +7,75 @@
   <style>
     :root {
       --primary-color: #C0DE63;
-      --accent-color: #a5c84f;
       --text-color: #222;
-      --glass-bg: rgba(255, 255, 255, 0.15);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --background-gradient: linear-gradient(135deg, #e8f0d9, #f6f8f9);
+      --background-color: #f9f9f9;
     }
 
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: var(--background-gradient);
+      background-color: var(--background-color);
       color: var(--text-color);
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      backdrop-filter: blur(2px);
     }
 
     header {
-      background-color: rgba(192, 222, 99, 0.9);
-      color: #fff;
-      padding: 2rem;
+      background-color: var(--primary-color);
+      color: #000;
+      padding: 1.5rem;
+      text-align: center;
       font-size: 2rem;
       font-weight: bold;
-      text-align: left;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     main {
       flex: 1;
       padding: 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+      text-align: center;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-align: left;
+    main h2 {
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
     }
 
-    h2 {
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-      text-align: left;
-    }
-
-    a.button {
+    button, a.button {
       display: inline-block;
-      background: var(--glass-bg);
-      color: #fff;
+      background-color: var(--primary-color);
+      color: #000; /* Black text for the button */
       text-decoration: none;
+      border: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
     }
 
-    a.button:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    button:hover, a.button:hover {
+      background-color: #a5c84f;
     }
 
     .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      margin-top: 1rem;
       list-style: none;
       padding: 0;
-      margin: 0;
     }
 
     .projects li {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      padding: 1.25rem 1.5rem;
-      border-radius: 12px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      font-weight: 500;
-      color: #222;
-      transition: transform 0.2s, box-shadow 0.3s;
-    }
-
-    .projects li:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      margin: 0.5rem 0;
+      font-weight: bold;
     }
 
     footer {
-      background-color: rgba(255,255,255,0.5);
+      background-color: #e4efc9;
       color: #333;
       padding: 1rem;
       text-align: center;
       font-size: 0.9rem;
-      backdrop-filter: blur(8px);
-      border-top: 1px solid var(--glass-border);
     }
   </style>
 </head>
@@ -121,22 +87,16 @@
   <main>
     <h1>This is the official website of the advanced DM group!</h1>
 
-    <h2>If you want to go to the OG DM site:</h2>
-    <a href="website.html" class="button">Go to OG Site</a>      
+    <h2>If you want to go to the og DM site:</h2>
+    <a href="website.html" class="button">Click me</a>
 
-    <h2>Current Projects:</h2>
+    <h2>Current projects:</h2>
     <ul class="projects">
       <li>Amplifier</li>
       <li>DM: The Movie</li>
       <li>Nerf</li>
       <li>Secret Project</li>
     </ul>
-
-    <h2>Expected DM: The Movie Release Date:</h2>
-    <ul class="projects">
-      <li>2025. August</li>
-    </ul>
-    
   </main>
 
   <footer>
