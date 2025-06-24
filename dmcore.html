@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DMCore</title>
+  <style>
+    :root {
+      --primary-color: #C0DE63;
+      --secondary-color: #D6EB97;
+      --text-color: #222;
+      --background-color: #000000;
+      --nav-bg: #111;
+      --nav-text: #C0DE63;
+      --nav-text-hover: #e6f38c;
+      --nav-border: #222;
+      --active-text-color: #000000; /* black for active tab text */
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      user-select: none;
+    }
+    .welcome {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .welcome p {
+      margin: 0;
+      padding: 0;
+    }
+    .info {
+      background-color: var(--primary-color);
+      color: #000;
+      text-align: center;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 1rem 0;
+    }
+
+    /* Top nav bar */
+    nav.top-nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid var(--nav-border);
+      user-select: none;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    nav.top-nav a {
+      color: var(--nav-text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--nav-border);
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+      cursor: pointer;
+    }
+    nav.top-nav a.active {
+      background-color: var(--primary-color);
+      color: var(--active-text-color); /* black text on active */
+      outline: none;
+    }
+    nav.top-nav a:hover:not(.active),
+    nav.top-nav a:focus:not(.active) {
+      background-color: var(--primary-color);
+      color: var(--primary-color);
+      outline: none;
+    }
+
+    /* Content sections */
+    .content-section {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      background-color: var(--nav-bg);
+      color: var(--nav-text);
+      padding: 1rem;
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .content-section.active {
+      display: flex;
+    }
+
+    .content-section a {
+      color: var(--nav-text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--nav-border);
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+    .content-section a:hover,
+    .content-section a:focus {
+      background-color: var(--primary-color);
+      color: var(--primary-color);
+      outline: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>DMCore</header>
+
+  <div class="welcome">
+    <p>Welcome to DMCore!</p>
+    <p>A place for all the files you may need</p>
+  </div>
+
+  <div class="info">
+    <p>Explore all the community uploaded files on DMCore.</p>
+  </div>
+
+  <!-- Top nav bar -->
+  <nav class="top-nav" role="navigation" aria-label="Main navigation">
+    <a href="#" id="filesLink" class="active" tabindex="0">Files</a>
+    <a href="#" id="changelogLink" tabindex="0">Changelog</a>
+  </nav>
+
+  <!-- Content sections -->
+  <nav class="content-section active" id="filesSection" aria-label="Download torrent files">
+    <span>Loading files…</span>
+  </nav>
+
+  <div class="content-section" id="changelogSection" aria-label="Changelog content">
+    <!-- Empty for now -->
+  </div>
+
+  <script>
+    const owner = 'dm6363';       
+    const repo = 'dm6363.github.io'; 
+    const path = 'torrents';      
+    
+    const filesSection = document.getElementById('filesSection');
+    const changelogSection = document.getElementById('changelogSection');
+    const filesLink = document.getElementById('filesLink');
+    const changelogLink = document.getElementById('changelogLink');
+
+    async function fetchTorrentFiles() {
+      try {
+        const apiURL = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+        const response = await fetch(apiURL);
+        if (!response.ok) throw new Error('Failed to fetch files from GitHub API');
+        const files = await response.json();
+
+        const torrentFiles = files.filter(f => f.name.toLowerCase().endsWith('.torrent'));
+
+        if (torrentFiles.length === 0) {
+          filesSection.innerHTML = '<span>No torrent files found.</span>';
+          return;
+        }
+
+        filesSection.innerHTML = '';
+
+        torrentFiles.forEach(file => {
+          const a = document.createElement('a');
+          a.href = file.download_url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = file.name;
+          a.setAttribute('download', '');
+          filesSection.appendChild(a);
+        });
+      } catch (error) {
+        filesSection.innerHTML = `<span style="color: #f00;">Error: ${error.message}</span>`;
+      }
+    }
+
+    // Tab switching
+    function switchTab(showFiles) {
+      if(showFiles) {
+        filesSection.classList.add('active');
+        changelogSection.classList.remove('active');
+        filesLink.classList.add('active');
+        changelogLink.classList.remove('active');
+      } else {
+        filesSection.classList.remove('active');
+        changelogSection.classList.add('active');
+        filesLink.classList.remove('active');
+        changelogLink.classList.add('active');
+      }
+    }
+
+    filesLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchTab(true);
+    });
+
+    changelogLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchTab(false);
+    });
+
+    window.addEventListener('load', fetchTorrentFiles);
+  </script>
+</body>
+</html>
