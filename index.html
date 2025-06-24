@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DMLabs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #C0DE63;
       --text-color: #222;
       --background-gradient: linear-gradient(120deg, #f4f9ec, #d0e6a5, #b0cc66);
     }
-  
+
     @keyframes gradientShift {
       0% {
         background-position: 0% 50%;
@@ -22,10 +23,10 @@
         background-position: 0% 50%;
       }
     }
-  
+
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Raleway', 'Segoe UI', sans-serif;
       background: var(--background-gradient);
       background-size: 200% 200%;
       animation: gradientShift 45s ease infinite;
@@ -34,7 +35,7 @@
       flex-direction: column;
       min-height: 100vh;
     }
-  
+
     header {
       background: rgba(192, 222, 99, 0.8);
       backdrop-filter: blur(8px);
@@ -42,28 +43,30 @@
       padding: 1.5rem;
       text-align: center;
       font-size: 2.5rem;
-      font-weight: bold;
+      font-weight: 800;
       border-bottom: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-  
+
     main {
       flex: 1;
       padding: 2rem;
       text-align: center;
     }
-  
+
     main h1 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      font-weight: 600;
     }
-  
+
     main h2 {
       margin-top: 2rem;
       margin-bottom: 0.5rem;
       font-size: 1.5rem;
+      font-weight: 600;
     }
-  
+
     button, a.button {
       display: inline-block;
       background: rgba(192, 222, 99, 0.2);
@@ -78,14 +81,15 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       margin: 0.5rem;
+      font-weight: 600;
     }
-  
+
     button:hover, a.button:hover {
       background: rgba(192, 222, 99, 0.35);
       border-color: rgba(192, 222, 99, 0.6);
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
-  
+
     .projects {
       margin-top: 1rem;
       list-style: none;
@@ -95,21 +99,21 @@
       justify-content: center;
       gap: 0.75rem;
     }
-  
+
     .projects li {
       background: rgba(255,255,255,0.2);
       border-radius: 10px;
       padding: 0.5rem 1rem;
-      font-weight: bold;
+      font-weight: 600;
       backdrop-filter: blur(6px);
       transition: transform 0.2s ease;
     }
-  
+
     .projects li:hover {
       transform: scale(1.05);
       background: rgba(255,255,255,0.3);
     }
-  
+
     .members {
       margin-top: 2rem;
       display: flex;
@@ -117,7 +121,7 @@
       justify-content: center;
       gap: 1.5rem;
     }
-  
+
     .member {
       background: rgba(255,255,255,0.15);
       border-radius: 12px;
@@ -128,12 +132,12 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
-  
+
     .member:hover {
       transform: translateY(-5px);
       background: rgba(255,255,255,0.25);
     }
-  
+
     .member img {
       width: 100%;
       height: auto;
@@ -141,13 +145,14 @@
       margin-bottom: 0.5rem;
       object-fit: cover;
     }
-  
+
     .member h3 {
       margin: 0.5rem 0 0;
       font-size: 1.2rem;
       color: #111;
+      font-weight: 600;
     }
-  
+
     .divider {
       width: 80%;
       height: 1px;
@@ -156,7 +161,7 @@
       backdrop-filter: blur(4px);
       border-radius: 2px;
     }
-  
+
     footer {
       background: rgba(228, 239, 201, 0.8);
       backdrop-filter: blur(6px);
@@ -167,7 +172,7 @@
       border-top: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
-</style>
+  </style>
 </head>
 <body>
   <header>
@@ -216,7 +221,6 @@
     <a href="https://docs.google.com/document/d/1KiWqmnN9o6yOvFV1EUBDcMj3_5-a5i9PMSziT7Hzhik/edit?tab=t.0" target="_blank" class="button">
       CircuitPython Cheatsheet
     </a>
-
   </main>
 
   <footer>
