@@ -201,6 +201,17 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
 
+    .secret-link {
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+.secret-link:hover {
+  color: var(--primary-color);
+}
+
+
     /* DARK MODE STYLES */
     body.dark {
       background: #111;
@@ -275,7 +286,7 @@
     <div class="divider fade-in"></div>
 
     <h2 class="fade-in">If you want to go to the OG DM site:</h2>
-    <a href="website.html" target="_blank" class="button fade-in">Visit OG DM Site</a>
+    <a href="dmlabs.online/ogdm/website" target="_blank" class="button fade-in">Visit OG DM Site</a>
 
     <div class="divider fade-in"></div>
 
@@ -340,7 +351,9 @@
 
   </main>
 
-  <footer class="fade-in">© 2025 DMLabs. All rights reserved.</footer>
+  <footer class="fade-in">
+  <span class="secret-link" onclick="window.location.href='https://odinsomv.asuscomm.com:6363/0.html'">©</span> 2025 DMLabs. All rights reserved.
+  </footer>
 
   <script>
     function toggleDarkMode() {
