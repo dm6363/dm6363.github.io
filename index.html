@@ -34,6 +34,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: background 0.5s, color 0.5s;
     }
 
     header {
@@ -95,23 +96,41 @@
       list-style: none;
       padding: 0;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
     }
 
     .projects li {
       background: rgba(255,255,255,0.2);
       border-radius: 10px;
-      padding: 0.5rem 1rem;
+      padding: 1rem;
       font-weight: 600;
       backdrop-filter: blur(6px);
       transition: transform 0.2s ease;
+      width: 300px;
     }
 
     .projects li:hover {
       transform: scale(1.05);
       background: rgba(255,255,255,0.3);
+    }
+
+    .progress {
+      background: rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-bar {
+      background: var(--primary-color);
+      color: #111;
+      padding: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      transition: width 0.6s ease;
     }
 
     .members {
@@ -172,35 +191,87 @@
       border-top: 1px solid rgba(255,255,255,0.2);
       box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
+
+    /* DARK MODE STYLES */
+    body.dark {
+      background: #111;
+      color: #eee;
+    }
+    body.dark header, body.dark footer {
+      background: rgba(50,50,50,0.9);
+    }
+    body.dark .button {
+      background: rgba(255, 255, 255, 0.1);
+      color: #eee;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    body.dark .projects li {
+      background: rgba(255,255,255,0.1);
+    }
+    body.dark .member {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* SCROLL ANIMATION */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    Welcome to DMLabs!
-  </header>
+  <header class="fade-in">Welcome to DMLabs!</header>
 
   <main>
-    <h1>This is the official website of the advanced DM group!</h1>
+    <h1 class="fade-in">This is the official website of the advanced DM group!</h1>
 
-    <div class="divider"></div>
+    <button onclick="toggleDarkMode()" class="button fade-in">Toggle Dark Mode</button>
 
-    <h2>If you want to go to the OG DM site:</h2>
-    <a href="website.html" target="_blank" class="button">Visit OG DM Site</a>
+    <div class="divider fade-in"></div>
 
-    <div class="divider"></div>
+    <h2 class="fade-in">If you want to go to the OG DM site:</h2>
+    <a href="website.html" target="_blank" class="button fade-in">Visit OG DM Site</a>
 
-    <h2>Current Projects:</h2>
-    <ul class="projects">
-      <li>Amplifier</li>
-      <li>DM: The Movie</li>
-      <li>Nerf</li>
-      <li>Secret Project</li>
+    <div class="divider fade-in"></div>
+
+    <h2 class="fade-in">Current Projects:</h2>
+    <ul class="projects fade-in">
+      <li>
+        Amplifier
+        <div class="progress">
+          <div class="progress-bar" style="width: 70%;">70%</div>
+        </div>
+      </li>
+      <li>
+        DM: The Movie
+        <div class="progress">
+          <div class="progress-bar" style="width: 45%;">45%</div>
+        </div>
+      </li>
+      <li>
+        Nerf
+        <div class="progress">
+          <div class="progress-bar" style="width: 30%;">30%</div>
+        </div>
+      </li>
+      <li>
+        Secret Project
+        <div class="progress">
+          <div class="progress-bar" style="width: 5%;">5%</div>
+        </div>
+      </li>
     </ul>
 
-    <div class="divider"></div>
+    <div class="divider fade-in"></div>
 
-    <h2>Members:</h2>
-    <div class="members">
+    <h2 class="fade-in">Members:</h2>
+    <div class="members fade-in">
       <div class="member">
         <img src="images/gabor.jpg" alt="Gábor">
         <h3>Gábor</h3>
@@ -215,19 +286,35 @@
       </div>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider fade-in"></div>
 
-    <h2>Helpful Links:</h2>
-    <a href="https://docs.google.com/document/d/1KiWqmnN9o6yOvFV1EUBDcMj3_5-a5i9PMSziT7Hzhik/edit?tab=t.0" target="_blank" class="button">
+    <h2 class="fade-in">Helpful Links:</h2>
+    <a href="https://docs.google.com/document/d/1KiWqmnN9o6yOvFV1EUBDcMj3_5-a5i9PMSziT7Hzhik/edit?tab=t.0" target="_blank" class="button fade-in">
       CircuitPython Cheatsheet
     </a>
-    <a href="https://dmlabs.online/dmcore" target="_blank" class="button">
+    <a href="https://dmlabs.online/dmcore" target="_blank" class="button fade-in">
       DMCore
     </a>
   </main>
 
-  <footer>
-    © 2025 DMLabs. All rights reserved.
-  </footer>
+  <footer class="fade-in">© 2025 DMLabs. All rights reserved.</footer>
+
+  <script>
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
