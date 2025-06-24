@@ -206,28 +206,44 @@
       background: #111;
       color: #eee;
     }
-    body.dark header, body.dark footer {
-      background: rgba(30,30,30,0.95);
+
+    body.dark header {
+      background: #C0DE63; /* exactly the green you wanted */
+      color: #222; /* dark text for readability */
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
+    body.dark footer {
+      background: rgba(30,30,30,0.95);
+      color: #eee;
+    }
+
     body.dark .button {
       background: rgba(255, 255, 255, 0.1);
       color: #eee;
       border-color: rgba(255, 255, 255, 0.3);
     }
+
     body.dark .projects li {
       background: rgba(255,255,255,0.1);
     }
+
     body.dark .member {
       background: rgba(255,255,255,0.05);
     }
+
     body.dark .member h3 {
-      color: #fff; /* FIX: makes member names white in dark mode */
+      color: #fff;
     }
+
     body.dark .dark-toggle-btn {
       background: rgba(255,255,255,0.1);
       color: #eee;
       border-color: rgba(255,255,255,0.3);
     }
+
     body.dark .dark-toggle-btn:hover {
       background: rgba(255,255,255,0.3);
       color: #000;
@@ -239,6 +255,7 @@
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
+
     .fade-in.show {
       opacity: 1;
       transform: translateY(0);
@@ -328,6 +345,12 @@
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
+      const btn = document.querySelector('.dark-toggle-btn');
+      if (document.body.classList.contains('dark')) {
+        btn.textContent = 'Light Mode';
+      } else {
+        btn.textContent = 'Dark Mode';
+      }
     }
 
     const observer = new IntersectionObserver(entries => {
