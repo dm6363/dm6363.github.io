@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dmCore</title>
+  <style>
+    :root {
+      --primary-color: #C0DE63;
+      --secondary-color: #D6EB97;
+      --text-color: #222;
+      --background-color: #000000;
+      --nav-bg: #111;
+      --nav-text: #C0DE63;
+      --nav-text-hover: #e6f38c;
+      --nav-border: #222;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-family: sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      user-select: none;
+    }
+    .welcome {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .welcome p {
+      margin: 0;
+      padding: 0;
+    }
+    .info {
+      background-color: var(--secondary-color);
+      color: #000;
+      text-align: center;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      padding: 1rem 0;
+    }
+    nav.top-nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--nav-border);
+      user-select: none;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    nav.top-nav a {
+      color: var(--nav-text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1px solid var(--nav-border);
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+    nav.top-nav a:hover,
+    nav.top-nav a:focus {
+      background-color: var(--primary-color);
+      color: var(--secondary-color);
+      outline: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>dmCore</header>
+
+  <div class="welcome">
+    <p>Welcome to dmCore!</p>
+    <p>A place for all the files you may need</p>
+  </div>
+
+  <div class="info">
+    <p>Explore all the community uploaded files on dmCore.</p>
+  </div>
+
+  <nav class="top-nav" role="navigation" aria-label="Download torrent files" id="fileList">
+    <span>Loading files…</span>
+  </nav>
+
+  <script>
+    // GitHub repo info
+    const owner = 'dm6363';       // your GitHub username
+    const repo = 'dm6363.github.io'; // your repo name
+    const path = 'torrents';      // folder in the repo where torrent files are
+    
+    const fileListNav = document.getElementById('fileList');
+
+    async function fetchTorrentFiles() {
+      try {
+        const apiURL = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+        const response = await fetch(apiURL);
+        if (!response.ok) throw new Error('Failed to fetch files from GitHub API');
+        const files = await response.json();
+
+        // Filter only torrent files
+        const torrentFiles = files.filter(f => f.name.toLowerCase().endsWith('.torrent'));
+
+        if (torrentFiles.length === 0) {
+          fileListNav.innerHTML = '<span>No torrent files found.</span>';
+          return;
+        }
+
+        // Clear loading text
+        fileListNav.innerHTML = '';
+
+        torrentFiles.forEach(file => {
+          const a = document.createElement('a');
+          a.href = file.download_url;  // direct download link from GitHub
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = file.name;
+          a.setAttribute('download', '');
+
+          fileListNav.appendChild(a);
+        });
+      } catch (error) {
+        fileListNav.innerHTML = `<span style="color: #f00;">Error: ${error.message}</span>`;
+      }
+    }
+
+    window.addEventListener('load', fetchTorrentFiles);
+  </script>
+</body>
+</html>
