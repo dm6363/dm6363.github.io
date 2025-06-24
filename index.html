@@ -201,75 +201,59 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
 
-    .secret-link {
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-
-.secret-link:hover {
-  color: var(--primary-color);
-}
-
-
-    /* DARK MODE STYLES */
     body.dark {
       background: #111;
       color: #eee;
     }
-
     body.dark header {
-      background: #C0DE63; /* exactly the green you wanted */
-      color: #222; /* dark text for readability */
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #C0DE63;
+      color: #222;
     }
-
     body.dark footer {
       background: rgba(30,30,30,0.95);
       color: #eee;
     }
-
     body.dark .button {
       background: rgba(255, 255, 255, 0.1);
       color: #eee;
       border-color: rgba(255, 255, 255, 0.3);
     }
-
     body.dark .projects li {
       background: rgba(255,255,255,0.1);
     }
-
     body.dark .member {
       background: rgba(255,255,255,0.05);
     }
-
     body.dark .member h3 {
       color: #fff;
     }
-
     body.dark .dark-toggle-btn {
       background: rgba(255,255,255,0.1);
       color: #eee;
       border-color: rgba(255,255,255,0.3);
     }
-
     body.dark .dark-toggle-btn:hover {
       background: rgba(255,255,255,0.3);
       color: #000;
     }
 
-    /* SCROLL ANIMATION */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-
     .fade-in.show {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .secret-link {
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .secret-link:active {
+      color: var(--primary-color);
     }
   </style>
 </head>
@@ -286,94 +270,60 @@
     <div class="divider fade-in"></div>
 
     <h2 class="fade-in">If you want to go to the OG DM site:</h2>
-    <a href="dmlabs.online/ogdm/website" target="_blank" class="button fade-in">Visit OG DM Site</a>
+    <a href="website.html" target="_blank" class="button fade-in">Visit OG DM Site</a>
 
     <div class="divider fade-in"></div>
 
     <h2 class="fade-in">Current Projects:</h2>
     <ul class="projects fade-in">
-      <li>
-        Amplifier
-        <div class="progress">
-          <div class="progress-bar" style="width: 80%;">80%</div>
-        </div>
-      </li>
-      <li>
-        DM: The Movie
-        <div class="progress">
-          <div class="progress-bar" style="width: 75%;">75%</div>
-        </div>
-      </li>
-      <li>
-        Nerf
-        <div class="progress">
-          <div class="progress-bar" style="width: 30%;">30%</div>
-        </div>
-      </li>
-      <li>
-        Secret Project
-        <div class="progress">
-          <div class="progress-bar" style="width: 10%;">10%</div>
-        </div>
-      </li>
+      <li>Amplifier<div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div></li>
+      <li>DM: The Movie<div class="progress"><div class="progress-bar" style="width: 75%;">75%</div></div></li>
+      <li>Nerf<div class="progress"><div class="progress-bar" style="width: 30%;">30%</div></div></li>
+      <li>Secret Project<div class="progress"><div class="progress-bar" style="width: 10%;">10%</div></div></li>
     </ul>
 
     <div class="divider fade-in"></div>
 
     <h2 class="fade-in">Members:</h2>
     <div class="members fade-in">
-      <div class="member">
-        <img src="images/gabor.jpg" alt="Gábor">
-        <h3>Gábor</h3>
-      </div>
-      <div class="member">
-        <img src="images/tomi.jpg" alt="Tomi">
-        <h3>Tomi</h3>
-      </div>
-      <div class="member">
-        <img src="images/keve.jpg" alt="Keve">
-        <h3>Keve</h3>
-      </div>
+      <div class="member"><img src="images/gabor.jpg" alt="Gábor"><h3>Gábor</h3></div>
+      <div class="member"><img src="images/tomi.jpg" alt="Tomi"><h3>Tomi</h3></div>
+      <div class="member"><img src="images/keve.jpg" alt="Keve"><h3>Keve</h3></div>
     </div>
 
     <div class="divider fade-in"></div>
 
     <h2 class="fade-in">Helpful Links:</h2>
-    <a href="https://docs.google.com/document/d/1KiWqmnN9o6yOvFV1EUBDcMj3_5-a5i9PMSziT7Hzhik/edit?tab=t.0" target="_blank" class="button fade-in">
-      CircuitPython Cheatsheet
-    </a>
-    <a href="https://dmlabs.online/dmcore" target="_blank" class="button fade-in">
-      DMCore
-    </a>
-    <a href="https://dmlabs.online/changelog" target="_blank" class="button fade-in">
-      View Changelog
-    </a>
-
+    <a href="https://docs.google.com/document/d/1KiWqmnN9o6yOvFV1EUBDcMj3_5-a5i9PMSziT7Hzhik/edit?tab=t.0" target="_blank" class="button fade-in">CircuitPython Cheatsheet</a>
+    <a href="https://dmlabs.online/dmcore" target="_blank" class="button fade-in">DMCore</a>
+    <a href="https://dmlabs.online/changelog" target="_blank" class="button fade-in">View Changelog</a>
   </main>
 
   <footer class="fade-in">
-  <span class="secret-link" onclick="window.location.href='https://odinsomv.asuscomm.com:6363/0.html'">©</span> 2025 DMLabs. All rights reserved.
+    <span class="secret-link" id="secretLink">©</span> 2025 DMLabs. All rights reserved.
   </footer>
 
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark');
-      const btn = document.querySelector('.dark-toggle-btn');
-      if (document.body.classList.contains('dark')) {
-        btn.textContent = 'Light Mode';
-      } else {
-        btn.textContent = 'Dark Mode';
-      }
     }
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('show');
       });
     });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    const secretLink = document.getElementById('secretLink');
+    let pressTimer;
+    secretLink.addEventListener('mousedown', () => {
+      pressTimer = setTimeout(() => {
+        window.location.href = 'https://odinsomv.asuscomm.com:6363/0.html';
+      }, 5000);
+    });
+    secretLink.addEventListener('mouseup', () => clearTimeout(pressTimer));
+    secretLink.addEventListener('mouseleave', () => clearTimeout(pressTimer));
   </script>
 </body>
 </html>
