@@ -6,74 +6,180 @@
   <title>DMLabs</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
+    :root{
       --primary-color: #C0DE63;
       --text-color: #222;
-      --background-gradient: linear-gradient(120deg, #f4f9ec, #d0e6a5, #b0cc66);
+      --muted: rgba(0,0,0,0.06);
+      --glass-bg: rgba(255,255,255,0.55);
+      --glass-border: rgba(255,255,255,0.55);
+      --glass-3d-accent: rgba(192,222,99,0.18);
+      --glass-blur: 10px;
+      --glass-sheen: rgba(255,255,255,0.45);
+      --card-radius: 12px;
+      --elevation-1: 0 6px 18px rgba(17,24,39,0.08);
+      --elevation-2: 0 14px 40px rgba(17,24,39,0.10);
+      --glass-contrast: rgba(255,255,255,0.75);
+      --bg-1: #f4f9ec;
+      --bg-2: #d0e6a5;
+      --bg-3: #b0cc66;
     }
 
+    /* Animated background */
     @keyframes gradientShift {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
       100% {background-position: 0% 50%;}
     }
 
+    /* page base */
+    html,body{
+      height:100%;
+    }
     body {
       margin: 0;
       font-family: 'DM Sans', 'Segoe UI', sans-serif;
-      background: var(--background-gradient);
-      background-size: 200% 200%;
-      animation: gradientShift 45s ease infinite;
       color: var(--text-color);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(255,255,255,0.55), transparent 8%),
+        radial-gradient(900px 500px at 90% 80%, rgba(192,222,99,0.12), transparent 8%),
+        linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--bg-3));
+      background-size: 200% 200%;
+      animation: gradientShift 45s ease infinite;
       transition: background 0.5s, color 0.5s;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      perspective: 1000px; /* give subtle 3D perspective to children */
     }
 
+    /* Base glass surface style used by header, cards, footer */
+    header,
+    .projects li,
+    .member,
+    footer,
+    .button,
+    a.button {
+      position: relative;
+      border-radius: var(--card-radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.44));
+      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(var(--glass-blur)) saturate(1.12);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.12);
+      box-shadow: var(--elevation-1), inset 0 1px 0 rgba(255,255,255,0.5);
+      overflow: visible;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    }
+
+    /* Create layered 3D feel using pseudo elements */
+    header::before,
+    header::after,
+    .member::before,
+    .member::after,
+    .projects li::before,
+    .projects li::after,
+    footer::before,
+    footer::after,
+    .button::before,
+    .button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.45s ease;
+    }
+
+    /* subtle soft colored halo behind elements for depth */
+    header::after,
+    .member::after,
+    .projects li::after,
+    footer::after {
+      filter: blur(22px);
+      opacity: 0.7;
+      z-index: -2;
+      transform: translateZ(-50px) scale(1.06);
+    }
+
+    header::after { background: radial-gradient(400px 120px at 10% 10%, rgba(192,222,99,0.12), transparent 20%); }
+    .member::after { background: radial-gradient(200px 80px at 50% 0%, rgba(176,204,102,0.12), transparent 25%); }
+    .projects li::after { background: radial-gradient(300px 120px at 0% 100%, rgba(192,222,99,0.08), transparent 25%); }
+    footer::after { background: radial-gradient(500px 120px at 100% 100%, rgba(192,222,99,0.06), transparent 25%); }
+
+    /* a thin glossy sheen */
+    header::before,
+    .member::before,
+    .projects li::before,
+    footer::before,
+    .button::before {
+      top: -2%;
+      left: -2%;
+      right: -2%;
+      height: 55%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 60%, transparent 100%);
+      opacity: 0.6;
+      transform-origin: left top;
+      z-index: 2;
+      mix-blend-mode: overlay;
+      border-top-left-radius: calc(var(--card-radius) + 2px);
+      border-top-right-radius: calc(var(--card-radius) + 2px);
+    }
+
+    /* header specifics */
     header {
       position: relative;
-      background: rgba(192, 222, 99, 0.8);
-      backdrop-filter: blur(8px);
-      color: #fff;
-      padding: 1.5rem;
+      padding: 1.8rem 2rem;
       text-align: center;
       font-size: 2.5rem;
       font-weight: 700;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-bottom: none;
+      box-shadow: 0 10px 30px rgba(12,18,24,0.08);
+      transform-style: preserve-3d;
+      will-change: transform;
+      margin: 1.4rem;
     }
 
+    header:hover {
+      transform: translateY(-6px) rotateX(2deg);
+      box-shadow: var(--elevation-2);
+    }
+
+    /* floating dark-toggle button with glass look */
     .dark-toggle-btn {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.35));
+      color: #111;
+      border: 1px solid rgba(255,255,255,0.7);
+      padding: 0.45rem 0.95rem;
+      border-radius: 10px;
       cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      z-index: 3;
     }
+    .dark-toggle-btn:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(17,24,39,0.08); }
 
-    .dark-toggle-btn:hover {
-      background: rgba(255,255,255,0.3);
-      color: #000;
-    }
-
+    /* main content layout */
     main {
       flex: 1;
-      padding: 2rem;
+      padding: 1.5rem;
       text-align: center;
+      display: block;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: calc(100% - 3rem);
     }
 
     h1, h2 {
       margin-bottom: 1rem;
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: -0.5px;
     }
 
     .projects {
@@ -87,30 +193,29 @@
     }
 
     .projects li {
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
       padding: 1rem;
       font-weight: 600;
-      backdrop-filter: blur(6px);
-      transition: transform 0.2s ease;
-      width: 300px;
+      width: 320px;
       text-align: left;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .projects li:hover {
-      transform: scale(1.05);
-      background: rgba(255,255,255,0.3);
+      transform: translateY(-8px) rotateX(2deg);
+      box-shadow: 0 26px 50px rgba(12,18,24,0.09);
     }
 
     .progress {
-      background: rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.08);
       border-radius: 8px;
       overflow: hidden;
       margin-top: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
     .progress-bar {
-      background: var(--primary-color);
+      background: linear-gradient(90deg, var(--primary-color), #e2f081 85%);
       color: #111;
       padding: 0.3rem;
       font-size: 0.85rem;
@@ -128,120 +233,83 @@
     }
 
     .member {
-      background: rgba(255,255,255,0.15);
-      border-radius: 12px;
       padding: 1rem;
       width: 200px;
       text-align: center;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      box-shadow: 0 10px 30px rgba(12,18,24,0.06);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255,255,255,0.55);
     }
 
     .member:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.25);
+      transform: translateY(-10px) rotateX(3deg);
+      box-shadow: 0 30px 60px rgba(12,18,24,0.10);
     }
 
     .member img {
       width: 100%;
-      height: auto;
+      height: 120px;
       border-radius: 8px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.45);
+      box-shadow: inset 0 -6px 18px rgba(0,0,0,0.06);
     }
 
     .member h3 {
       margin: 0.5rem 0 0;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #111;
-      font-weight: 600;
-      transition: color 0.3s ease;
+      font-weight: 700;
     }
 
     .divider {
       width: 80%;
       height: 1px;
       margin: 2rem auto;
-      background: rgba(0,0,0,0.1);
-      backdrop-filter: blur(4px);
+      background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.06));
       border-radius: 2px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.02));
     }
 
     footer {
-      background: rgba(228, 239, 201, 0.8);
-      backdrop-filter: blur(6px);
-      color: #333;
+      margin: 1.4rem;
       padding: 1rem;
-      text-align: center;
+      color: #333;
       font-size: 0.9rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 -10px 30px rgba(12,18,24,0.04);
     }
 
+    /* buttons as glass */
     .button {
       display: inline-block;
-      background: rgba(192, 222, 99, 0.2);
-      color: #222;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.36));
+      color: #111;
       text-decoration: none;
-      border: 1px solid rgba(192, 222, 99, 0.4);
+      border: 1px solid rgba(255,255,255,0.7);
       padding: 0.75rem 1.5rem;
       border-radius: 12px;
       font-size: 1rem;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 30px rgba(12,18,24,0.06);
       margin: 0.5rem;
-      font-weight: 500;
+      font-weight: 600;
+      transform-style: preserve-3d;
     }
 
     .button:hover {
-      background: rgba(192, 222, 99, 0.35);
-      border-color: rgba(192, 222, 99, 0.6);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 30px 60px rgba(12,18,24,0.09);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45));
     }
 
-    body.dark {
-      background: #111;
-      color: #eee;
-    }
-    body.dark header {
-      background: #C0DE63;
-      color: #222;
-    }
-    body.dark footer {
-      background: rgba(30,30,30,0.95);
-      color: #eee;
-    }
-    body.dark .button {
-      background: rgba(255, 255, 255, 0.1);
-      color: #eee;
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    body.dark .projects li {
-      background: rgba(255,255,255,0.1);
-    }
-    body.dark .member {
-      background: rgba(255,255,255,0.05);
-    }
-    body.dark .member h3 {
-      color: #fff;
-    }
-    body.dark .dark-toggle-btn {
-      background: rgba(255,255,255,0.1);
-      color: #eee;
-      border-color: rgba(255,255,255,0.3);
-    }
-    body.dark .dark-toggle-btn:hover {
-      background: rgba(255,255,255,0.3);
-      color: #000;
-    }
-
+    /* fade-in animations */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.9,.2,1);
     }
     .fade-in.show {
       opacity: 1;
@@ -251,11 +319,61 @@
     .secret-link {
       cursor: pointer;
       user-select: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, transform 0.2s ease;
     }
-    .secret-link:active {
-      color: var(--primary-color);
+    .secret-link:active { color: var(--primary-color); transform: scale(0.98); }
+
+    /* Dark mode handling: switch variables and tweak glass */
+    body.dark {
+      --text-color: #eaeaea;
+      --glass-bg: rgba(15,15,15,0.34);
+      --glass-border: rgba(255,255,255,0.06);
+      --glass-3d-accent: rgba(192,222,99,0.06);
+      --glass-blur: 10px;
+      --glass-sheen: rgba(255,255,255,0.06);
+      --bg-1: #0f1113;
+      --bg-2: #0c0e10;
+      --bg-3: #071012;
+      color: var(--text-color);
+      background:
+        radial-gradient(1200px 600px at 10% 20%, rgba(255,255,255,0.02), transparent 8%),
+        radial-gradient(900px 500px at 90% 80%, rgba(192,222,99,0.03), transparent 8%),
+        linear-gradient(120deg, #0b0f0e, #09100d, #07120c);
     }
+
+    body.dark header,
+    body.dark .projects li,
+    body.dark .member,
+    body.dark footer,
+    body.dark .button {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    body.dark header::after,
+    body.dark .member::after,
+    body.dark .projects li::after,
+    body.dark footer::after {
+      opacity: 0.25;
+    }
+
+    body.dark .member h3 { color: #f6f6f6; }
+    body.dark .button { color: #eaeaea; border-color: rgba(255,255,255,0.06); }
+    body.dark .dark-toggle-btn { color: #eaeaea; background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+
+    /* Responsive adjustments */
+    @media (max-width:720px){
+      header { font-size: 1.8rem; padding: 1rem; margin: 1rem; }
+      .projects li { width: 92%; }
+      .member { width: 46%; }
+      .members { gap: 1rem; }
+    }
+    @media (max-width:420px){
+      .member { width: 100%; }
+      .dark-toggle-btn { top: 0.75rem; right: 0.75rem; padding: 0.35rem 0.7rem; font-size: 0.8rem; }
+    }
+
   </style>
 </head>
 
